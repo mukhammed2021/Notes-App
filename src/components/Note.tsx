@@ -7,25 +7,43 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Trash2, Edit } from "lucide-react";
+import { ACTIONTYPE, Note as NoteType } from "../lib/types";
 
-export default function Note() {
+interface NoteProps {
+   note: NoteType;
+   dispatch: React.Dispatch<ACTIONTYPE>;
+}
+
+export default function Note({ note, dispatch }: NoteProps) {
+   const { id, title, content } = note;
+
+   function handleClickDelete() {
+      dispatch({ type: "deleted", payload: id });
+   }
+
+   function handleClickEdit() {
+      dispatch({ type: "edited", payload: { id, title, content } });
+   }
+
    return (
       <Card>
          <CardHeader>
-            <CardTitle>Title</CardTitle>
+            <CardTitle>{title}</CardTitle>
          </CardHeader>
-         <CardContent>Content</CardContent>
+         <CardContent>{content}</CardContent>
          <CardFooter className="flex items-center gap-4">
             <Button
                variant="outline"
-               className="inline-flex items-center gap-4 w-full"
+               onClick={handleClickEdit}
+               className="inline-flex w-full items-center gap-4"
             >
                <Edit />
                Edit
             </Button>
             <Button
                variant="destructive"
-               className="inline-flex items-center gap-4 w-full"
+               onClick={handleClickDelete}
+               className="inline-flex w-full items-center gap-4"
             >
                <Trash2 />
                Delete
