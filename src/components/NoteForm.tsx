@@ -10,14 +10,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { type ACTIONTYPE, type Note } from "@/lib/types";
+import { useNotes } from "@/context/NotesContext";
 
-interface NoteFormProps {
-   editingNote: Note | null;
-   dispatch: React.Dispatch<ACTIONTYPE>;
-}
+export default function NoteForm() {
+   const { editingNote, dispatch } = useNotes();
 
-export default function NoteForm({ editingNote, dispatch }: NoteFormProps) {
    const [note, setNote] = useState({
       id: self.crypto.randomUUID(),
       title: "",

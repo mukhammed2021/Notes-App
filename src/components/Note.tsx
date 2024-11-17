@@ -1,3 +1,4 @@
+import { Trash2, Edit } from "lucide-react";
 import {
    Card,
    CardContent,
@@ -6,15 +7,16 @@ import {
    CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Trash2, Edit } from "lucide-react";
-import { ACTIONTYPE, Note as NoteType } from "../lib/types";
+import { Note as NoteType } from "../lib/types";
+import { useNotes } from "@/context/NotesContext";
 
 interface NoteProps {
    note: NoteType;
-   dispatch: React.Dispatch<ACTIONTYPE>;
 }
 
-export default function Note({ note, dispatch }: NoteProps) {
+export default function Note({ note }: NoteProps) {
+   const { dispatch } = useNotes();
+
    const { id, title, content } = note;
 
    function handleClickDelete() {
