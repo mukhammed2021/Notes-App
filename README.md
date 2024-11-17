@@ -1,6 +1,6 @@
 # Notes App
 
-Для запуска проекта:
+### Dev
 
 ```bash
   pnpm install
